@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MADLevel1Task2</string>
+    <string name="tv_header">Conjunction (AND)</string>
+    <string name="a_header">A</string>
+    <string name="b_header">B</string>
+    <string name="ab_header">A ^ B</string>
+    <string name="tv_T">T</string>
+    <string name="tv_F">F</string>
+    <string name="pt_C1" />
+    <string name="pt_C2" />
+    <string name="pt_C3" />
+    <string name="pt_C4" />
+    <string name="btn_submit">SUBMIT</string>
+    <string name="correct">%d answers are correct</string>
+    <string name="t_or_f">please fill in a T or F</string>
+</resources>
