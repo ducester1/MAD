@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel2task2.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initViews()
     }
 
@@ -55,11 +55,15 @@ class MainActivity : AppCompatActivity() {
                 if (direction == ItemTouchHelper.LEFT) {
                     if(!questions[position].answer) {
                         questions.removeAt(position)
+                    } else {
+                        Snackbar.make(binding.root, "That is not the correct answer so it will not be removed from the list", Snackbar.LENGTH_LONG).show()
                     }
 
                 } else {
                     if (questions[position].answer) {
                         questions.removeAt(position)
+                    } else {
+                        Snackbar.make(binding.root, "That is not the correct answer so it will not be removed from the list", Snackbar.LENGTH_LONG).show()
                     }
                 }
                 questionAdapter.notifyItemChanged(position)
