@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MADLevel2Task2</string>
+    <string name="tv_header1">Quiz instructions</string>
+    <string name="tv_header2">Swipe right for true, swipe left for false.</string>
+</resources>
