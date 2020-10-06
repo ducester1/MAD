@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvQuestions.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
 
         for (i in Question.QUESTIONS.indices) {
-            questions.add(Question(Question.QUESTIONS[i]))
+            questions.add(Question(Question.QUESTIONS[i], Question.ANSWERS[i]))
         }
         questionAdapter.notifyDataSetChanged()
 
@@ -52,7 +52,17 @@ class MainActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                questions.removeAt(position)
+                if (direction == ItemTouchHelper.LEFT) {
+                    if(!questions[position].answer) {
+                        questions.removeAt(position)
+                    }
+
+                } else {
+                    if (questions[position].answer) {
+                        questions.removeAt(position)
+                    }
+                }
+                questionAdapter.notifyItemChanged(position)
                 questionAdapter.notifyDataSetChanged()
             }
         }
