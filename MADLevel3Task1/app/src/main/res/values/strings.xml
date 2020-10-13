@@ -12,4 +12,8 @@
     <string name="welcome">Welcome to the Games Rating app!</string>
     <string name="click">Click START to start rating :)</string>
     <string name="start">START</string>
+    <string name="rate">Rate the following game from 1 to 5 stars!</string>
+    <string name="to_summary">TO SUMMARY</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
