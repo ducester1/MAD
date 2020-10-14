@@ -15,7 +15,7 @@ private var portals: ArrayList<Portal> = arrayListOf()
 
 class PortalsFragment : Fragment() {
 
-    private var portalAdapter: PortalAdapter = PortalAdapter(portals)
+    private var portalAdapter: PortalAdapter = PortalAdapter(portals) { portal : Portal -> portalItemClicked(portal)}
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -42,5 +42,9 @@ class PortalsFragment : Fragment() {
             portals.add(portal)
             portalAdapter.notifyDataSetChanged()
         }
+    }
+
+    private fun portalItemClicked(portal: Portal) {
+        println("Clicked " + portal.title + " , from " + portal.url)
     }
 }
