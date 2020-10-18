@@ -48,20 +48,18 @@ class ShoppingListFragment : Fragment() {
         initRv()
 
         fabAdd.setOnClickListener {
-            showAddProductdialog();
+            showAddProductdialog()
+        }
+
+        fabDelete.setOnClickListener {
+            removeAllProducts()
         }
     }
 
     private fun initRv() {
         rvShoppingList.layoutManager = LinearLayoutManager(this.requireContext(), RecyclerView.VERTICAL, false)
         rvShoppingList.adapter = shoppingListAdapter
-
         rvShoppingList.addItemDecoration(DividerItemDecoration(rvShoppingList.context, RecyclerView.VERTICAL))
-
-//        for (i in Product.AMOUNT.indices) {
-//            products.add(Product(Product.AMOUNT[i], Product.NAMES[i]))
-//        }
-//        shoppingListAdapter.notifyDataSetChanged()
 
         createItemTouchHelper().attachToRecyclerView(rvShoppingList)
     }
@@ -114,6 +112,15 @@ class ShoppingListFragment : Fragment() {
         } else {
             Toast.makeText(activity, "Please fill in the fields", Toast.LENGTH_LONG).show()
             false
+        }
+    }
+
+    private fun removeAllProducts() {
+        MainScope().launch {
+            withContext(Dispatchers.IO) {
+                productRepository.deleteAllProducts()
+            }
+            getShoppingListFromDatabase()
         }
     }
 
