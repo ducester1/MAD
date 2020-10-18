@@ -6,7 +6,7 @@
     app:startDestination="@id/shoppingListFragment">
     <fragment
         android:id="@+id/shoppingListFragment"
-        android:name="com.example.madlevel4task1.ShoppingListFragment"
+        android:name="com.example.madlevel4task1.ui.ShoppingListFragment"
         android:label="fragment_shopping_list"
         tools:layout="@layout/fragment_shopping_list" />
 </navigation>

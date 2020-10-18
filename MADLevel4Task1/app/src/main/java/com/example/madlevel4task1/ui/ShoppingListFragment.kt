@@ -1,4 +1,4 @@
-package com.example.madlevel4task1
+package com.example.madlevel4task1.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madlevel4task1.R
+import com.example.madlevel4task1.model.Product
 import kotlinx.android.synthetic.main.fragment_shopping_list.*
 
 /**
@@ -39,10 +41,10 @@ class ShoppingListFragment : Fragment() {
 
         rvShoppingList.addItemDecoration(DividerItemDecoration(rvShoppingList.context, RecyclerView.VERTICAL))
 
-        for (i in Product.AMOUNT.indices) {
-            products.add(Product(Product.AMOUNT[i],Product.NAMES[i]))
-        }
-        shoppingListAdapter.notifyDataSetChanged()
+//        for (i in Product.AMOUNT.indices) {
+//            products.add(Product(Product.AMOUNT[i], Product.NAMES[i]))
+//        }
+//        shoppingListAdapter.notifyDataSetChanged()
 
         createItemTouchHelper().attachToRecyclerView(rvShoppingList)
     }
