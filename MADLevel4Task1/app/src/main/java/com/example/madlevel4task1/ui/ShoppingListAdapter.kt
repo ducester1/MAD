@@ -11,10 +11,10 @@ import kotlinx.android.synthetic.main.item_product.view.*
 class ShoppingListAdapter(private val products: List<Product>) : RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-//        fun databind(product: Product) {
-//            itemView.tvAmount.text = product..toString()
-//            itemView.tvName.text = product.name.toString().plus("X")
-//        }
+        fun databind(product: Product) {
+            itemView.tvAmount.text = product.productAmount.toString() + "X"
+            itemView.tvName.text = product.productName
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,6 +28,6 @@ class ShoppingListAdapter(private val products: List<Product>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        holder.databind(products[position])
+        holder.databind(products[position])
     }
 }
