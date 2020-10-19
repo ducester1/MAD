@@ -16,4 +16,7 @@
     <string name="you">You</string>
     <string name="statistics">"Your all time statistics\nWin: 8 Draw: 5 Lose: 10"</string>
     <string name="result">You win!</string>
+    <string name="win">You win!</string>
+    <string name="lose">You lose!</string>
+    <string name="draw">draw!</string>
 </resources>
