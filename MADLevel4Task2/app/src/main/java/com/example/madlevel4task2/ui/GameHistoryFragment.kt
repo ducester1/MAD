@@ -1,12 +1,15 @@
-package com.example.madlevel4task2
+package com.example.madlevel4task2.ui
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madlevel4task2.R
+import com.example.madlevel4task2.model.Game
+import com.example.madlevel4task2.model.GameMoves
+import com.example.madlevel4task2.model.GameResults
 import kotlinx.android.synthetic.main.fragment_game_history.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -16,13 +19,15 @@ import kotlin.collections.ArrayList
  */
 class GameHistoryFragment : Fragment() {
 
-    private val games: ArrayList<Game> = arrayListOf(Game(
+    private val games: ArrayList<Game> = arrayListOf(
+        Game(
         GameMoves.ROCK, GameMoves.SCISSOR, Calendar.getInstance().time,
         GameResults.LOSE
-    ),Game(
+    ), Game(
         GameMoves.SCISSOR, GameMoves.ROCK, Calendar.getInstance().time,
         GameResults.WIN
-    ))
+    )
+    )
     private lateinit var gamesAdapter: GameAdapter
 
     override fun onCreateView(
