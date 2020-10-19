@@ -17,8 +17,8 @@
     <string name="statistics">"Your all time statistics\nWin: 8 Draw: 5 Lose: 10"</string>
     <string name="result">You win!</string>
     <string name="win">You win!</string>
-    <string name="lose">You lose!</string>
-    <string name="draw">draw!</string>
+    <string name="lose">Computer wins!</string>
+    <string name="draw">Draw!</string>
     <string name="action_game_history">Game history</string>
     <string name="action_back">Back</string>
 </resources>

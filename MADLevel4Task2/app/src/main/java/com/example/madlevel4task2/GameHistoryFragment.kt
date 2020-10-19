@@ -4,11 +4,26 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_game_history.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class GameHistoryFragment : Fragment() {
+
+    private val games: ArrayList<Game> = arrayListOf(Game(
+        GameMoves.ROCK, GameMoves.SCISSOR, Calendar.getInstance().time,
+        GameResults.LOSE
+    ),Game(
+        GameMoves.SCISSOR, GameMoves.ROCK, Calendar.getInstance().time,
+        GameResults.WIN
+    ))
+    private lateinit var gamesAdapter: GameAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +40,13 @@ class GameHistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        rvHistory.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+
+        rvHistory.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+
+        gamesAdapter = GameAdapter(games)
+        rvHistory.adapter = gamesAdapter
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
