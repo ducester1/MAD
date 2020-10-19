@@ -10,7 +10,9 @@ import com.example.madlevel4task2.R
 import com.example.madlevel4task2.model.Game
 import com.example.madlevel4task2.model.GameMoves
 import com.example.madlevel4task2.model.GameResults
+import com.example.madlevel4task2.repository.GameRepository
 import kotlinx.android.synthetic.main.fragment_game_history.*
+import kotlinx.coroutines.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -19,15 +21,12 @@ import kotlin.collections.ArrayList
  */
 class GameHistoryFragment : Fragment() {
 
-    private val games: ArrayList<Game> = arrayListOf(
-        Game(
-        GameMoves.ROCK, GameMoves.SCISSOR, Calendar.getInstance().time,
-        GameResults.LOSE
-    ), Game(
-        GameMoves.SCISSOR, GameMoves.ROCK, Calendar.getInstance().time,
-        GameResults.WIN
-    )
-    )
+
+    private val mainScope = CoroutineScope(Dispatchers.Main)
+    private lateinit var gameRepository: GameRepository
+
+
+    private var games: ArrayList<Game> = arrayListOf()
     private lateinit var gamesAdapter: GameAdapter
 
     override fun onCreateView(
@@ -52,16 +51,38 @@ class GameHistoryFragment : Fragment() {
 
         gamesAdapter = GameAdapter(games)
         rvHistory.adapter = gamesAdapter
+
+        gameRepository = GameRepository(requireContext())
+        getHistoryFromDatabase()
+    }
+
+    private fun getHistoryFromDatabase() {
+        mainScope.launch {
+            val games = withContext(Dispatchers.IO) {
+                gameRepository.getAllGames()
+            }
+            this@GameHistoryFragment.games.clear()
+            this@GameHistoryFragment.games.addAll(games)
+            gamesAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun deleteHistory() {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                gameRepository.deleteHistory()
+            }
+            getHistoryFromDatabase()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_delete -> {
-                println("deleted")
+                deleteHistory()
                 return true
             }
             android.R.id.home -> {
-                println("back")
                 activity?.onBackPressed()
                 return true
             }
