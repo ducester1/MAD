@@ -8,5 +8,18 @@
         android:id="@+id/gameFragment"
         android:name="com.example.madlevel4task2.GameFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_gameFragment_to_gameHistoryFragment"
+            app:destination="@id/gameHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameHistoryFragment"
+        android:name="com.example.madlevel4task2.GameHistoryFragment"
+        android:label="fragment_game_history"
+        tools:layout="@layout/fragment_game_history" >
+        <action
+            android:id="@+id/action_gameHistoryFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
 </navigation>

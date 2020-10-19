@@ -19,4 +19,6 @@
     <string name="win">You win!</string>
     <string name="lose">You lose!</string>
     <string name="draw">draw!</string>
+    <string name="action_game_history">Game history</string>
+    <string name="action_back">Back</string>
 </resources>
