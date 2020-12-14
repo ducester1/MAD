@@ -9,7 +9,7 @@ class Note (
     var title: String,
     var date: Date,
     var text: String,
-    @PrimaryKey
-    var id: Long ) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Long? = null ) {
 
 }
