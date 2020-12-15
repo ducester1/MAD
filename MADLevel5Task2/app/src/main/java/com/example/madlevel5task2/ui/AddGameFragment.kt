@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.madlevel5task2.R
+import com.example.madlevel5task2.models.Game
+import com.example.madlevel5task2.viewmodels.GameViewModel
+import kotlinx.android.synthetic.main.fragment_add_game.*
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -14,6 +19,7 @@ import com.example.madlevel5task2.R
 class AddGameFragment : Fragment() {
 
     private lateinit var navController: NavController
+    private val viewModel: GameViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +32,7 @@ class AddGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navController = findNavController()
         setHasOptionsMenu(true)
+        initViews()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -34,6 +41,8 @@ class AddGameFragment : Fragment() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
+        activity?.title = "Add Game"
+        menu.removeItem(R.id.clear_game_backlog)
         super.onPrepareOptionsMenu(menu)
     }
 
@@ -44,5 +53,21 @@ class AddGameFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initViews() {
+        fab_save_game.setOnClickListener {
+            viewModel.addGame(createGame())
+            navController.popBackStack()
+        }
+    }
+
+    private fun createGame(): Game {
+        val gameTitle = et_game_title.text.toString()
+        val gamePlatforms = et_game_platforms.text.toString()
+        val gameDate = Date((et_game_date_year.text.toString().toInt()-1900),
+        et_game_date_month.text.toString().toInt()-1,
+        et_game_date_day.text.toString().toInt())
+        return Game(gameTitle,gamePlatforms,gameDate)
     }
 }

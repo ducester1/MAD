@@ -19,9 +19,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         navController = findNavController(R.id.nav_host_fragment)
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            navController.navigate(R.id.action_GameBacklogFragment_to_AddGameFragment)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
