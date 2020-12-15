@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/colorBackgroundDark"
+    tools:context=".ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="start"
         android:theme="@style/Theme.MADLevel5Task2.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
@@ -16,11 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.MADLevel5Task2.PopupOverlay" />
+            android:theme="@style/Theme.MADLevel5Task2.AppBarOverlay"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_marginTop="60dp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -28,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:tint="@android:color/white"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
