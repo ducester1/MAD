@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Game Backlog</string>
+    <string name="clear_game_backlog_label">Clear game backlog</string>
+
+    <string name="release">Release: %1$s</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="game_backlog_label">Game backlog Fragment</string>
+    <string name="add_game_fragment_label">Add game Fragment</string>
+
+</resources>
