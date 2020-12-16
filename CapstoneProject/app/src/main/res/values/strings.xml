@@ -15,6 +15,12 @@
     <string name="tvRecipesCardDescription">A list of your own made recipes.</string>
     <string name="btn_what_can_you_make">What can u make</string>
 
+    <string name="toast_fill_everything">Please fill in all the fields before saving</string>
+
     <!-- Fragment Titles -->
     <string name="landing_fragment_title">Warehouse Manager</string>
+    <string name="tv_expire_date">Expire date:</string>
+    <string name="tv_ingredient_add_amount">Amount:</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_scan_barcode">scan barcode</string>
 </resources>

@@ -25,7 +25,7 @@
             android:id="@+id/tv_ingredient_card_image"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-
+            android:layout_marginStart="5dp"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:id="@+id/tv_ingredient_card_scale"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
+            android:layout_marginEnd="5dp"
             android:text="gram"
             android:gravity="center_vertical"
             android:textSize="20sp" />

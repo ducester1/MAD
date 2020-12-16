@@ -4,13 +4,18 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.R
 import com.example.capstoneproject.adapters.IngredientAdapter
 import com.example.capstoneproject.models.Ingredient
+import com.example.capstoneproject.viewmodels.IngredientViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_warehouse.*
 import java.util.*
 
@@ -19,13 +24,10 @@ import java.util.*
  */
 class WarehouseFragment : Fragment() {
 
-    private val ingredients = arrayListOf<Ingredient>(
-        Ingredient(null,"Aardappelen", "Gewoon", 5, "kg", Date(2019 - 1900,7,11), 1),
-        Ingredient(null,"Aardappelen", "Gewoon", 5, "kg", Date(2019 - 1900,7,11), 2)
-    )
-
     private lateinit var navController: NavController
+    private val viewModel: IngredientViewModel by viewModels()
 
+    private val ingredients = arrayListOf<Ingredient>()
     private val ingredientAdapter: IngredientAdapter = IngredientAdapter(ingredients)
 
     override fun onCreateView(
@@ -41,11 +43,12 @@ class WarehouseFragment : Fragment() {
         setHasOptionsMenu(true)
         super.onViewCreated(view, savedInstanceState)
 
-//        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-//            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-//        }
+        view.findViewById<FloatingActionButton>(R.id.FAB_add_ingredient).setOnClickListener {
+            findNavController().navigate(R.id.action_warehouseFragment_to_addIngredientFragment)
+        }
 
         initViews()
+        observeAddIngredientResult()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -69,5 +72,37 @@ class WarehouseFragment : Fragment() {
     private fun initViews() {
         rv_ingredients.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         rv_ingredients.adapter = ingredientAdapter
+        createItemTouchHelper().attachToRecyclerView(rv_ingredients)
+    }
+
+    private fun observeAddIngredientResult() {
+        viewModel.ingredients.observe(viewLifecycleOwner, Observer{ ingredients ->
+            this@WarehouseFragment.ingredients.clear()
+            this@WarehouseFragment.ingredients.addAll(ingredients)
+
+            this.ingredientAdapter.notifyDataSetChanged()
+        })
+    }
+
+    private fun createItemTouchHelper(): ItemTouchHelper {
+        var callback = object : ItemTouchHelper.SimpleCallback(
+                0,
+                ItemTouchHelper.LEFT
+        ) {
+            override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val ingredientToDelete: Ingredient = ingredients[position]
+                viewModel.deleteIngredient(ingredientToDelete)
+            }
+        }
+        return ItemTouchHelper(callback)
     }
 }
