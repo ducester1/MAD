@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
 import com.example.capstoneproject.R
 
@@ -26,6 +27,10 @@ class LandingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<CardView>(R.id.cv_warehouse).setOnClickListener{
+            findNavController().navigate(R.id.action_landingFragment_to_warehouseFragment)
+        }
 
         view.findViewById<Button>(R.id.btnWhatCanUMake).setOnClickListener {
             //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
