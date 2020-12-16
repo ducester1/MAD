@@ -32,6 +32,10 @@ class LandingFragment : Fragment() {
             findNavController().navigate(R.id.action_landingFragment_to_warehouseFragment)
         }
 
+        view.findViewById<CardView>(R.id.cv_recipes).setOnClickListener{
+            findNavController().navigate(R.id.action_landingFragment_to_recipesFragment)
+        }
+
         view.findViewById<Button>(R.id.btnWhatCanUMake).setOnClickListener {
             //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }

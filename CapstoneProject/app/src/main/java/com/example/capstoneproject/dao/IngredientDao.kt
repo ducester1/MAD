@@ -19,7 +19,7 @@ interface IngredientDao {
     @Delete
     suspend fun deleteIngredient(ingredient: Ingredient)
 
-    @Query("DELETE FROM ingredientstable")
+    @Query("DELETE FROM IngredientsTable")
     suspend fun deleteAllIngredients()
 
 }

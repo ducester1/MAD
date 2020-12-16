@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 _, destination, _ ->
             if(destination.id == R.id.landingFragment) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            } else if(destination.id == R.id.warehouseFragment) {
+            } else{
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
             }
         }

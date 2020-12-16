@@ -23,4 +23,6 @@
     <string name="tv_ingredient_add_amount">Amount:</string>
     <string name="btn_save">Save</string>
     <string name="btn_scan_barcode">scan barcode</string>
+    <string name="tv_recipe_ingredients">Ingredients:</string>
+    <string name="tv_recipe_preparing">Preparing:</string>
 </resources>

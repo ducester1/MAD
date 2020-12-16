@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_landingFragment_to_warehouseFragment"
             app:destination="@id/warehouseFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_recipesFragment"
+            app:destination="@id/recipesFragment" />
     </fragment>
     <fragment
         android:id="@+id/warehouseFragment"
@@ -33,5 +36,25 @@
         <action
             android:id="@+id/action_addIngredientFragment_to_warehouseFragment"
             app:destination="@id/warehouseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipesFragment"
+        android:name="com.example.capstoneproject.ui.RecipesFragment"
+        android:label="fragment_recipes"
+        tools:layout="@layout/fragment_recipes" >
+        <action
+            android:id="@+id/action_recipesFragment_to_landingFragment"
+            app:destination="@id/landingFragment" />
+        <action
+            android:id="@+id/action_recipesFragment_to_addRecipeFragment"
+            app:destination="@id/addRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeFragment"
+        android:name="com.example.capstoneproject.ui.AddRecipeFragment"
+        android:label="AddRecipeFragment" >
+        <action
+            android:id="@+id/action_addRecipeFragment_to_recipesFragment"
+            app:destination="@id/recipesFragment" />
     </fragment>
 </navigation>
