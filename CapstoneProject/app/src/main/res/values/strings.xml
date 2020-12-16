@@ -9,4 +9,12 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="tvWarehouseCardTitle">Warehouse</string>
+    <string name="tvWarehouseCardDescription">A list of all the ingredients you currently own.</string>
+    <string name="tvRecipesCardTitle">Recipes</string>
+    <string name="tvRecipesCardDescription">A list of your own made recipes.</string>
+    <string name="btn_what_can_you_make">What can u make</string>
+
+    <!-- Fragment Titles -->
+    <string name="landing_fragment_title">Warehouse Manager</string>
 </resources>
