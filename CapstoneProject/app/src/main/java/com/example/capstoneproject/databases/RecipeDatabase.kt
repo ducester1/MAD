@@ -37,7 +37,7 @@ abstract class RecipeDatabase : RoomDatabase() {
                                         super.onCreate(db)
                                         INSTANCE?.let { database ->
                                             CoroutineScope(Dispatchers.IO).launch {
-                                                database.recipeDao().addRecipe(Recipe(null,"AVG", "Aardappelen Vlees Groenten", mutableListOf("Hollandse pot", "koolhydraten"), null,"koken", 1))
+                                                //database.recipeDao().addRecipe(Recipe(null,"AVG", "Aardappelen Vlees Groenten", mutableListOf("Hollandse pot", "koolhydraten"), null,"koken", 1))
                                             }
                                         }
                                     }

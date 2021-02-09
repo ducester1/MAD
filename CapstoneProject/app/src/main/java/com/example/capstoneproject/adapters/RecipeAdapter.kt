@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.R
 import com.example.capstoneproject.models.Recipe
+import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.fragment_add_recipe.view.*
 import kotlinx.android.synthetic.main.item_recipe.view.*
 
 class RecipeAdapter(private val recipies: List<Recipe>): RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
@@ -15,7 +17,12 @@ class RecipeAdapter(private val recipies: List<Recipe>): RecyclerView.Adapter<Re
             //todo: itemView.tv_ingredient_card_image =
             itemView.tv_recipe_card_name.text = recipe.name
             itemView.tv_recipe_card_description.text = recipe.description.toString()
-            //todo: action chips
+            itemView.cg_recipe_card_categories.removeAllViews()
+            for (index in 0 until recipe.categories?.count()!!) {
+                val chip = Chip(itemView.context)
+                chip.text = recipe.categories!![index]
+                itemView.cg_recipe_card_categories.addView(chip)
+            }
         }
     }
 

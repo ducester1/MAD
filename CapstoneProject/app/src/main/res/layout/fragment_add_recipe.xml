@@ -83,9 +83,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Categories:"
+                        android:imeOptions="actionSend"
                         android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp">
+
+                </com.google.android.material.chip.ChipGroup>
 
                 <View
                     android:id="@+id/divider"

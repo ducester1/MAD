@@ -3,6 +3,8 @@ package com.example.capstoneproject.ui
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.children
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -10,10 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.capstoneproject.R
 import com.example.capstoneproject.models.Recipe
 import com.example.capstoneproject.viewmodels.RecipeViewModel
-import kotlinx.android.synthetic.main.fragment_add_ingredient.*
+import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_add_ingredient.btn_add_ingredient
 import kotlinx.android.synthetic.main.fragment_add_recipe.*
-import java.util.*
+import kotlinx.android.synthetic.main.item_recipe.view.*
+
 
 class AddRecipeFragment: Fragment() {
 
@@ -62,17 +65,37 @@ class AddRecipeFragment: Fragment() {
                 Toast.makeText(context, R.string.toast_fill_everything, Toast.LENGTH_SHORT).show()
             }
         }
+
+        et_recipe_categories.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                println("enter pressed")
+                val chip = Chip(context)
+                chip.text = et_recipe_categories.text.toString()
+                chip.setOnClickListener{
+                    cg_categories.removeView(chip)
+                }
+                cg_categories.addView(chip)
+                et_recipe_categories.setText("")
+            }
+            false
+        })
     }
 
     private fun createRecipe(): Recipe {
         //Todo: val image =
         val name = et_recipe_name.text.toString()
         val description = et_recipe_description.text.toString()
-        //Todo: val categories =
-        //Todo: ingredients =
-        val preperation = et_recipe_preparing.text.toString()
 
-        return Recipe(null, name, description, null, null, preperation)
+        val categories = mutableListOf<String>()
+
+        for (index in 0 until cg_categories.childCount) {
+            val chip:Chip = cg_categories.getChildAt(index) as Chip
+            categories.add(chip.text.toString())
+        }
+        //Todo: ingredients =
+        val preparation = et_recipe_preparing.text.toString()
+
+        return Recipe(null, name, description, categories, null, preparation)
     }
 
     //Check if n
