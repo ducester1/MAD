@@ -47,7 +47,8 @@
             app:destination="@id/landingFragment" />
         <action
             android:id="@+id/action_recipesFragment_to_addRecipeFragment"
-            app:destination="@id/addRecipeFragment" />
+            app:destination="@id/addRecipeFragment" >
+        </action>
     </fragment>
     <fragment
         android:id="@+id/addRecipeFragment"
@@ -56,5 +57,9 @@
         <action
             android:id="@+id/action_addRecipeFragment_to_recipesFragment"
             app:destination="@id/recipesFragment" />
+        <argument
+            android:name="RecipeID"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
 </navigation>

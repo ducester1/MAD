@@ -1,6 +1,7 @@
 package com.example.capstoneproject.repository
 
 import android.content.Context
+import android.database.Observable
 import androidx.lifecycle.LiveData
 import com.example.capstoneproject.dao.RecipeDao
 import com.example.capstoneproject.databases.RecipeDatabase
@@ -18,8 +19,17 @@ class RecipeRepository(context: Context) {
         return recipeDao.getAllRecipes()
     }
 
+    fun getRecipe(id: Long): LiveData<Recipe> {
+        return recipeDao.getRecipe(id)
+    }
+
     suspend fun addRecipe(recipe: Recipe) {
         recipeDao.addRecipe(recipe)
+    }
+
+    suspend fun updateRecipe(recipe: Recipe) {
+        recipeDao.updateRecipe(recipe)
+        println(recipe.id)
     }
 
     suspend fun deleteRecipe(recipe: Recipe) {

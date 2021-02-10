@@ -3,9 +3,14 @@ package com.example.capstoneproject.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.R
 import com.example.capstoneproject.models.Recipe
+import com.example.capstoneproject.ui.RecipesFragmentDirections
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_add_recipe.view.*
 import kotlinx.android.synthetic.main.item_recipe.view.*
@@ -22,6 +27,11 @@ class RecipeAdapter(private val recipies: List<Recipe>): RecyclerView.Adapter<Re
                 val chip = Chip(itemView.context)
                 chip.text = recipe.categories!![index]
                 itemView.cg_recipe_card_categories.addView(chip)
+            }
+
+            itemView.setOnClickListener {
+                val action = RecipesFragmentDirections.actionRecipesFragmentToAddRecipeFragment(recipe.id!!)
+                itemView.findNavController().navigate(action)
             }
         }
     }

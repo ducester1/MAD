@@ -2,6 +2,7 @@ package com.example.capstoneproject.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import com.example.capstoneproject.models.Ingredient
 import com.example.capstoneproject.models.Recipe
 import com.example.capstoneproject.repository.IngredientRepository
@@ -17,10 +18,22 @@ class RecipeViewModel(application: Application) : AndroidViewModel(application) 
     private val recipeRepository: RecipeRepository = RecipeRepository(application.applicationContext)
     val recipes = recipeRepository.getAllRecipes()
 
+    fun getRecipe(id: Long): LiveData<Recipe> {
+        return recipeRepository.getRecipe(id)
+    }
+
     fun addRecipe(recipe: Recipe) {
         mainScope.launch {
             withContext(Dispatchers.IO) {
                 recipeRepository.addRecipe(recipe)
+            }
+        }
+    }
+
+    fun updateRecipe(recipe: Recipe) {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                recipeRepository.updateRecipe(recipe)
             }
         }
     }
