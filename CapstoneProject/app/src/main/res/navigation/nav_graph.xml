@@ -36,6 +36,10 @@
         <action
             android:id="@+id/action_addIngredientFragment_to_warehouseFragment"
             app:destination="@id/warehouseFragment" />
+        <argument
+            android:name="IngredientID"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
     <fragment
         android:id="@+id/recipesFragment"

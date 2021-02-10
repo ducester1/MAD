@@ -141,13 +141,13 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_game_date_day"
+                    android:id="@+id/til_expiration_date_day"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_game_date_day"
+                        android:id="@+id/et_expiration_date_day"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Day"
@@ -156,13 +156,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_game_date_month"
+                    android:id="@+id/til_expiration_date_month"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_game_date_month"
+                        android:id="@+id/et_expiration_date_month"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Month"
@@ -170,13 +170,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_game_date_year"
+                    android:id="@+id/til_expiration_date_year"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_game_date_year"
+                        android:id="@+id/et_expiration_date_year"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Year"

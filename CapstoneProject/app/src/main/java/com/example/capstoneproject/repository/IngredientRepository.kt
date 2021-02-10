@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.capstoneproject.dao.IngredientDao
 import com.example.capstoneproject.databases.IngredientDatabase
 import com.example.capstoneproject.models.Ingredient
+import com.example.capstoneproject.models.Recipe
 
 class IngredientRepository(context: Context) {
     private val ingredientDao: IngredientDao
@@ -18,8 +19,16 @@ class IngredientRepository(context: Context) {
         return ingredientDao.getAllIngredients()
     }
 
+    fun getIngredient(id: Long): LiveData<Ingredient> {
+        return ingredientDao.getIngredient(id)
+    }
+
     suspend fun addIngredient(ingredient: Ingredient) {
         ingredientDao.addIngredient(ingredient)
+    }
+
+    suspend fun updateIngredient(ingredient: Ingredient) {
+        ingredientDao.updateIngredient(ingredient)
     }
 
     suspend fun deleteIngredient(ingredient: Ingredient) {

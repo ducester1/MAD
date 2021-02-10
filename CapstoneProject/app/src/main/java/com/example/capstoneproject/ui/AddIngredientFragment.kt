@@ -7,16 +7,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.capstoneproject.R
 import com.example.capstoneproject.models.Ingredient
 import com.example.capstoneproject.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_add_ingredient.*
 import java.util.*
+import androidx.lifecycle.Observer
 
 class AddIngredientFragment : Fragment() {
 
     private lateinit var navController: NavController
     private val viewModel: IngredientViewModel by viewModels()
+
+    val args: AddIngredientFragmentArgs by navArgs<AddIngredientFragmentArgs>()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -51,10 +55,36 @@ class AddIngredientFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    // Todo: Replace date
     private fun initViews() {
+        val ingredientID = args.IngredientID
+        if (ingredientID != -1L) {
+            val ingredient = viewModel.getIngredient(ingredientID)
+            ingredient.observe(viewLifecycleOwner, Observer { ingredient ->
+                et_ingredient_name.setText(ingredient.name)
+                et_ingredient_description.setText(ingredient.description)
+                et_ingredient_amount.setText(ingredient.amount.toString())
+                et_ingredient_scale.setText(ingredient.scale)
+                val day = ingredient.expireDate.day
+                et_expiration_date_day.setText(day.toString())
+                val month = ingredient.expireDate.month + 1
+                et_expiration_date_month.setText(month.toString())
+                val year = ingredient.expireDate.year  +1900
+                et_expiration_date_year.setText(year.toString())
+            })
+        }
+
+
         btn_add_ingredient.setOnClickListener{
             if (checkForm()) {
-                viewModel.addIngredient(createIngredient())
+                if (ingredientID == -1L) {
+                    viewModel.addIngredient(createIngredient())
+                } else {
+                    val ingredient = createIngredient()
+                    ingredient.id = args.IngredientID
+                    viewModel.updateIngredient(ingredient)
+                }
+
                 navController.popBackStack()
             } else {
                 Toast.makeText(context, R.string.toast_fill_everything,Toast.LENGTH_SHORT).show()
@@ -68,9 +98,9 @@ class AddIngredientFragment : Fragment() {
         val ingredientDescription = et_ingredient_description.text.toString()
         val ingredientAmount = et_ingredient_amount.text.toString().toInt()
         val ingredientScale = et_ingredient_scale.text.toString()
-        val ingredientExpireDate = Date((et_game_date_year.text.toString().toInt() - 1900),
-                et_game_date_month.text.toString().toInt() - 1,
-                et_game_date_day.text.toString().toInt())
+        val ingredientExpireDate = Date((et_expiration_date_year.text.toString().toInt() - 1900),
+                et_expiration_date_month.text.toString().toInt() - 1,
+                et_expiration_date_day.text.toString().toInt())
 
         return Ingredient(null, ingredientName, ingredientDescription, ingredientAmount, ingredientScale, ingredientExpireDate)
     }
@@ -81,9 +111,9 @@ class AddIngredientFragment : Fragment() {
             et_ingredient_description.text.toString(),
             et_ingredient_amount.text.toString(),
             et_ingredient_scale.text.toString(),
-            et_game_date_day.text.toString(),
-            et_game_date_month.text.toString(),
-            et_game_date_year.text.toString()
+            et_expiration_date_day.text.toString(),
+            et_expiration_date_month.text.toString(),
+            et_expiration_date_year.text.toString()
             -> return false
         }
         return true

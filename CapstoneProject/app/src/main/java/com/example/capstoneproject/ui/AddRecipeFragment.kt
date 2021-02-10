@@ -34,7 +34,6 @@ class AddRecipeFragment: Fragment() {
 
     val args: AddRecipeFragmentArgs by navArgs<AddRecipeFragmentArgs>()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navController = findNavController()
         setHasOptionsMenu(true)
@@ -63,7 +62,6 @@ class AddRecipeFragment: Fragment() {
 
     private fun initViews() {
         val recipeID = args.RecipeID
-        println(recipeID)
         if (recipeID != -1L) {
             val recipe = viewModel.getRecipe(recipeID)
             recipe.observe(viewLifecycleOwner, Observer { recipe ->
