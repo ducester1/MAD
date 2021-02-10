@@ -7,11 +7,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.R
 import com.example.capstoneproject.models.Ingredient
-import com.example.capstoneproject.ui.RecipesFragmentDirections
 import com.example.capstoneproject.ui.WarehouseFragmentDirections
 import kotlinx.android.synthetic.main.item_ingredient.view.*
 
-class IngredientAdapter(private val ingredients: List<Ingredient>): RecyclerView.Adapter<IngredientAdapter.ViewHolder>() {
+class IngredientAdapter (private val ingredients: List<Ingredient>): RecyclerView.Adapter<IngredientAdapter.ViewHolder>() {
+
+    var onItemClick: ((Ingredient) -> Unit)? = null
+    var items: List<Ingredient> = emptyList()
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun databind(ingredient: Ingredient) {
@@ -20,9 +22,11 @@ class IngredientAdapter(private val ingredients: List<Ingredient>): RecyclerView
             itemView.tv_ingredient_card_amount.text = ingredient.amount.toString()
             itemView.tv_ingredient_card_scale.text = ingredient.scale
 
+        }
+
+        init {
             itemView.setOnClickListener {
-                val action = WarehouseFragmentDirections.actionWarehouseFragmentToAddIngredientFragment(ingredient.id!!)
-                itemView.findNavController().navigate(action)
+                onItemClick?.invoke(ingredients[adapterPosition])
             }
         }
     }

@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -26,6 +27,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
+            android:background="#FFFFFF"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <TextView
@@ -33,17 +35,17 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="Aardappelen"
             android:gravity="center_vertical"
+            android:text="Aardappelen"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_ingredient_card_amount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="500"
-            android:paddingEnd="2dp"
             android:gravity="center_vertical"
+            android:paddingEnd="2dp"
+            android:text="500"
             android:textSize="20sp" />
 
         <TextView
@@ -51,8 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="5dp"
-            android:text="gram"
             android:gravity="center_vertical"
+            android:text="gram"
             android:textSize="20sp" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

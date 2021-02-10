@@ -39,7 +39,7 @@ class Converters {
             }.toTypedArray()
 
             for (s in array) {
-                if (s.isNullOrEmpty()) {
+                if (!s.isNullOrEmpty()) {
                     list.add(s.toLong())
                 }
             }

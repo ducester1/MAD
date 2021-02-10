@@ -3,10 +3,12 @@ package com.example.capstoneproject.ui
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,9 +30,12 @@ class WarehouseFragment : Fragment() {
     private val ingredients = arrayListOf<Ingredient>()
     private val ingredientAdapter: IngredientAdapter = IngredientAdapter(ingredients)
 
+    private val args: WarehouseFragmentArgs by navArgs<WarehouseFragmentArgs>()
+    private var isRecipeIngredient = false
+
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_warehouse, container, false)
@@ -40,6 +45,8 @@ class WarehouseFragment : Fragment() {
         navController = findNavController()
         setHasOptionsMenu(true)
         super.onViewCreated(view, savedInstanceState)
+
+        if (args.RecipeID != -1L) isRecipeIngredient = true
 
         view.findViewById<FloatingActionButton>(R.id.FAB_add_ingredient).setOnClickListener {
             findNavController().navigate(R.id.action_warehouseFragment_to_addIngredientFragment)
@@ -59,7 +66,7 @@ class WarehouseFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             android.R.id.home -> {
                 navController.navigate(R.id.action_warehouseFragment_to_landingFragment)
             }
@@ -70,11 +77,33 @@ class WarehouseFragment : Fragment() {
     private fun initViews() {
         rv_ingredients.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         rv_ingredients.adapter = ingredientAdapter
+
+        ingredientAdapter.onItemClick = { ingredient ->
+            if (findNavController().currentDestination!!.id == R.id.warehouseFragment) {
+                if (isRecipeIngredient) {
+                    val action = ingredient.id?.let {
+                        WarehouseFragmentDirections.actionWarehouseFragmentToAddRecipeFragment(args.RecipeID,
+                            it
+                        )
+
+                    }
+                    if (action != null) {
+                        findNavController().navigate(action)
+                    }
+                } else {
+                    val action =
+                        WarehouseFragmentDirections.actionWarehouseFragmentToAddIngredientFragment(
+                            ingredient.id!!
+                        )
+                    findNavController().navigate(action)
+                }
+            }
+        }
         createItemTouchHelper().attachToRecyclerView(rv_ingredients)
     }
 
     private fun observeAddIngredientResult() {
-        viewModel.ingredients.observe(viewLifecycleOwner, Observer{ ingredients ->
+        viewModel.ingredients.observe(viewLifecycleOwner, Observer { ingredients ->
             this@WarehouseFragment.ingredients.clear()
             this@WarehouseFragment.ingredients.addAll(ingredients)
 
@@ -84,13 +113,13 @@ class WarehouseFragment : Fragment() {
 
     private fun createItemTouchHelper(): ItemTouchHelper {
         var callback = object : ItemTouchHelper.SimpleCallback(
-                0,
-                ItemTouchHelper.LEFT
+            0,
+            ItemTouchHelper.LEFT
         ) {
             override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
             ): Boolean {
                 return true
             }

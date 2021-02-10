@@ -29,7 +29,6 @@ class RecipeRepository(context: Context) {
 
     suspend fun updateRecipe(recipe: Recipe) {
         recipeDao.updateRecipe(recipe)
-        println(recipe.id)
     }
 
     suspend fun deleteRecipe(recipe: Recipe) {
